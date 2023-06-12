@@ -1,0 +1,11 @@
+.medium_box {
+	text-align: center;
+	height: 140px;
+	.ant-image {
+		height: 100%;
+	}
+	.ant-image-img {
+		height: 100%;
+		object-fit: contain;
+	}
+}

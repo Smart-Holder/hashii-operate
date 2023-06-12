@@ -1,0 +1,13 @@
+.avatar-uploader {
+	.ant-upload {
+		// transform: translate(-50%, -50%);
+		position: relative;
+	}
+
+	.loading_icon {
+		position: absolute;
+		top: 45%;
+		left: 45%;
+		// transform: translate(-50%, -50%);
+	}
+}

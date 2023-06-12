@@ -1,0 +1,40 @@
+.page1 {
+	flex: 1;
+
+	.page1_wapper {
+		display: flex;
+		align-items: center;
+		// justify-content: center;
+		height: 100%;
+		flex-direction: column;
+
+		.balances,
+		.actions {
+			.title {
+				font-size: 30px;
+				font-weight: bold;
+				margin-bottom: 80px;
+			}
+		}
+
+		.actions {
+			margin-bottom: 30px;
+			.ant-row {
+				margin-bottom: 20px;
+			}
+		}
+
+		.balances {
+			width: 50%;
+			.ant-col {
+				font-size: 30px;
+				font-weight: bold;
+			}
+		}
+
+		.account {
+			margin-bottom: 160px;
+			width: 100%;
+		}
+	}
+}

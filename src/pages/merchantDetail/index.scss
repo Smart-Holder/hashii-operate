@@ -1,0 +1,22 @@
+.merchant_detail {
+	.phone_row {
+		align-items: flex-end;
+		.ant-form-item {
+			margin-inline-end: 8px;
+		}
+	}
+
+	.card_upload {
+		width: 100%;
+		.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select,
+		.ant-upload-list.ant-upload-list-picture-card .ant-upload-list-item-container,
+		.ant-upload-wrapper {
+			width: 300px;
+			height: 200px;
+		}
+	}
+
+	// .ant-form-item {
+	// 	margin-bottom: 30px;
+	// }
+}

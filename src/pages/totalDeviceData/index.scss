@@ -1,0 +1,21 @@
+.device_detail_modal {
+	.device_detail_body {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		.detail_box {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			margin-bottom: 20px;
+			.label {
+				white-space: nowrap;
+			}
+			.row {
+				display: flex;
+				width: 30%;
+				align-items: flex-end;
+			}
+		}
+	}
+}

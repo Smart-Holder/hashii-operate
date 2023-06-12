@@ -1,0 +1,3 @@
+[submodule "somes"]
+	path = somes
+	url = http://gitlab.stars-mine.com/hardware/somes.git

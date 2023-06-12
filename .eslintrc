@@ -1,0 +1,22 @@
+{
+	"extends": [
+		"react-app",
+		"react-app/jest",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking"
+	],
+	"parserOptions": {
+		"project": [
+			"./tsconfig.json"
+		],
+		"tsconfigRootDir": "."
+	},
+	"rules": {
+		"@typescript-eslint/no-unsafe-call": "off",
+		"@typescript-eslint/no-misused-promises": "off",
+		"@typescript-eslint/no-unsafe-assignment": "warn",
+		"import/no-anonymous-default-export": "off",
+		"@typescript-eslint/require-await": "off",
+		"@typescript-eslint/no-floating-promises": "off",
+		"@typescript-eslint/no-implicit-any-catch": "off"
+	}
+}
