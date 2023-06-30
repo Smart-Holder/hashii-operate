@@ -64,12 +64,12 @@ export default () => {
 					icon: <IconFont type="icon-icshowall" />,
 					hideInMenu: !isAdmin,
 				},
-				// {
-				// 	path: RouterConfig.Path.series,
-				// 	name: "系列管理",
-				// 	icon: <IconFont type="icon-xilie" />,
-				// 	hideInMenu: !isAdmin,
-				// },
+				{
+					path: RouterConfig.Path.series,
+					name: "系列管理",
+					icon: <IconFont type="icon-xilie" />,
+					hideInMenu: !isAdmin,
+				},
 				{
 					path: RouterConfig.Path.apk,
 					name: "Apk管理",

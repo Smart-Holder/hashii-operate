@@ -7,7 +7,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { getWorkDetail, IWorksAddProps, workIssue, IExtensionsItemProps, IWorkIssueProps } from "../../models/works";
 import { convertValueEnum } from "../../components/select";
 // import { ChainNameEnum } from "../../interface";
-import { getUserSeriesList, IUserSeriesListItem } from "../../models/series";
+import { getChainList, getUserSeriesList, IUserSeriesListItem } from "../../models/series";
 import { DefaultOptionType } from "antd/es/select";
 import Radio from "../../components/radio";
 import { composite } from "../../models/file";
@@ -19,8 +19,9 @@ import NftModal from "./nftModal";
 import { t } from "../../utils/tools";
 import "./index.scss";
 import Button from "../../components/button";
-// import { isAdmin } from "../main/_defaultProps";
+import { isAdmin } from "../main/_defaultProps";
 import { PlusOutlined } from "@ant-design/icons";
+import Select from "../../components/select";
 
 const useForm = Form.useForm;
 
@@ -163,7 +164,8 @@ const WorksIssue = () => {
 							workID,
 							nftUrl: workInfo?.workPictureUrl,
 							issueType: 0,
-							seriesID: Number(seriesID[process.env.REACT_APP_NODE_ENV]),
+							// seriesID,
+							// seriesID: Number(seriesID[process.env.REACT_APP_NODE_ENV]),
 							extensions,
 						};
 						console.log(process.env, seriesID[process.env.REACT_APP_NODE_ENV], "process.env");
@@ -214,7 +216,7 @@ const WorksIssue = () => {
 						setextensions([]);
 					}}
 				>
-					{/* <Row className="chain_row">
+					<Row className="chain_row">
 						<Col>
 							<Select
 								width="xs"
@@ -263,7 +265,7 @@ const WorksIssue = () => {
 								extra={`${t("当前系列")}${series?.chainCanMintNum || 0}${t("剩余可发行")}`}
 							/>
 						</Col>
-					</Row> */}
+					</Row>
 
 					{/* <Radio
 						colProps={{ md: 24, xl: 24 }}
