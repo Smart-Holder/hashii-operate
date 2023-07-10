@@ -17,7 +17,7 @@ const apiUrl: { [key: string]: string } = {
 
 	test: "https://managerapi-test.smartholder.jp/service",
 	development: "https://hashii-manager-dev2.stars-mine.com/service",
-	production: "https://managerapi.smartholder.jp/service",
+	production: "https://managerapi-v2.smartholder.jp/service",
 };
 
 export interface IDataProps<T> {
