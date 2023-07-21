@@ -1,11 +1,17 @@
-import axios, { AxiosError, AxiosRequestConfig, Canceler } from "axios";
-import Qs from "qs";
 import { message } from "antd";
+import AWS from "aws-sdk";
+import axios, { AxiosError, AxiosRequestConfig, Canceler } from "axios";
 import { t } from "i18next";
+import Qs from "qs";
 import ErrorCode from "./errorCode";
 import { getUserInfo, logout } from "./tools";
 // import { getUserInfo } from "./utils";
-// import { getUserInfo } from "./utils";
+AWS.config.update({
+	accessKeyId: 'AKIARTU4UXGJFLBJ4RFC',
+	secretAccessKey: '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'
+});
+const S3 = new AWS.S3();
+const BucketName = "hashii-img/img/fcb";
 
 const apiUrl: { [key: string]: string } = {
 	// 'dev': "https://manager-dev.stars-mine.com/api/v1/backend",
@@ -173,3 +179,43 @@ const axiosPost = <T>(props: IAxiosGetProps): Promise<IDataProps<T>> => {
 export default _axios;
 
 export { axiosGet, axiosPost };
+
+// export const AwsUpload = ({
+// 	albumBucketName = "hashii-img/img",
+// 	photoKey,
+// 	file,
+// }:{
+// 	albumBucketName:string,
+// 	photoKey:string,
+// 	file:any
+// }) =>  new AWS.S3.ManagedUpload({
+//     params: {
+//       Bucket: albumBucketName,
+//       Key: photoKey,
+//       Body: file,
+// 	  ACL: 'public-read'
+//     }
+//   }).promise();
+
+export const AwsUpload = ({
+	Bucket = BucketName,
+	Key,
+	Body,
+	ContentType,
+	ContentDisposition = 'inline'
+}:{
+	Bucket:string,
+	Key:string,
+	Body:any,
+	ContentType?:string,
+	ContentDisposition?:'inline' | 'attachment'
+}) =>  S3.upload({
+	Bucket,
+	Key,
+	Body,
+	ACL: 'public-read',
+	ContentType,
+	ContentDisposition,
+},{
+	partSize:10 * 1024 * 1024
+}).promise();
