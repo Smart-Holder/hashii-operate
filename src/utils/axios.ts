@@ -11,7 +11,7 @@ AWS.config.update({
 	secretAccessKey: 'qiEj8CWeD2JenaH081jxSh9bYaAJMNb18CNJy94q'
 });
 const S3 = new AWS.S3();
-const BucketName = "hashii-img/img/fcb";
+const BucketName = "hashii-img/img";
 
 const apiUrl: { [key: string]: string } = {
 	// 'dev': "https://manager-dev.stars-mine.com/api/v1/backend",
