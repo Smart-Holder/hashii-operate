@@ -86,7 +86,7 @@ const ProUpload = (props: IUploadQiniuProps) => {
 			}else if(envType === "production"||envType === "prod"){
 				KeyName = "prod-"+folder;
 			}
-			const data = await AwsUpload({ Bucket:'hashii-img/img/fcb', Key:`${KeyName}/${file.name}`, Body:file, ContentType:file.type });
+			const data = await AwsUpload({ Bucket:'hashii-img/img', Key:`${KeyName}/${file.name}`, Body:file, ContentType:file.type });
 			// const image = path.endsWith(".mp4") ? path + "?vframe/jpg/offset/1" : path;
 			// console.log(data,'data')
 			const path = `https://files.smartholder.jp/${data.Key}`
