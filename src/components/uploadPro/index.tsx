@@ -5,7 +5,7 @@ import { UploadRequestOption } from "rc-upload/lib/interface";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 // import { omit } from "../../tools/utils";
 import "./index.scss";
-import { upload } from "../../models/file";
+// import { upload } from "../../models/file";
 import { RcFile } from "antd/es/upload";
 import { ProFormUploadButton, ProFormUploadButtonProps } from "@ant-design/pro-components";
 import { t } from "../../utils/tools";
@@ -91,6 +91,8 @@ const ProUpload = (props: IUploadQiniuProps) => {
 			const fileName = file.name;
 			const filename = fileName.substring(0, fileName.lastIndexOf("."))
 			const filename_suffix = '.'+fileName.split('.').pop();
+
+
 			
 			const data = await AwsUpload({ Bucket:'hashii-img/img', Key:`${KeyName}/${filename}_${time}${filename_suffix}`, Body:file, ContentType:file.type });
 			// const image = path.endsWith(".mp4") ? path + "?vframe/jpg/offset/1" : path;
