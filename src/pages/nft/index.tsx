@@ -413,7 +413,7 @@ const Nft = () => {
 								</Button>
 							</Popconfirm>
 						)}
-						{![2, 3, 4, 5, 6].includes(item.airdropStatus) && (
+						{![2, 3, 4, 6].includes(item.airdropStatus) && (
 							<div onClick={() => setcurrNft(item)}>{AirdropModal}</div>
 						)}
 					</div>
