@@ -54,6 +54,11 @@ enum mustEnum {
 	"是" = 1,
 }
 
+enum flagsEnum {
+	"否" = 0,
+	"是" = 1,
+}
+
 enum forbiddenEnum {
 	"启用" = 0,
 	"禁用" = 1,
@@ -67,6 +72,7 @@ const initialValues = {
 	versionName: "",
 	url: "",
 	description: "",
+	flags: 0,
 };
 
 const Apk = () => {
@@ -296,6 +302,11 @@ const Apk = () => {
 		<IconFont style={{ fontSize: 20 }} type="icon-zhuanhuan1" onClick={() => setshowUpload(!showUpload)} />
 	);
 
+	const handleCascaderChange = () => {
+		modalForm.setFieldsValue({
+			flags: 0,
+		});
+	};
 	return (
 		<div>
 			<ProTable<IApkItemProps>
@@ -333,10 +344,12 @@ const Apk = () => {
 				}}
 				initialValues={initialValues}
 				onFinish={async (e: IApkAddProps) => {
+					console.log(e.apkType, "ee");
 					const apkType0 = Number(e.apkType[0]);
 					const apkType1 = Number(e.apkType[1]);
-					e.apkType = apkType0 === 0 ? apkType0 : apkType1;
-					console.log(e, "e");
+					// e.apkType = apkType0 === 0 ? apkType0 : apkType1;
+					e.apkType = Array.isArray(e.apkType) && e.apkType.length >= 2 ? apkType1 : apkType0;
+					console.log(e, "eeeee", currApk?.id);
 
 					currApk?.id ? await apkEdit({ ...e, id: currApk.id }) : await apkAdd(e);
 					onCancel();
@@ -344,6 +357,15 @@ const Apk = () => {
 					message.success(t(`${currApk?.id ? "编辑" : "新增"}apk成功!`));
 					return true;
 				}}
+				// onFieldsChange={(props) => {
+				// 	const filename = props[0].name as string[];
+				// 	if (filename.includes("apkType")) {
+				// 		console.log(filename, "filename");
+				// 		modalForm.setFieldsValue({
+				// 			flags: 0,
+				// 		});
+				// 	}
+				// }}
 			>
 				{/* <Radio name="apkType" label="APK类型" valueEnum={convertValueEnum(apkTypeEnum)} required /> */}
 				<ProFormCascader
@@ -374,6 +396,7 @@ const Apk = () => {
 								],
 							},
 						],
+						onChange: handleCascaderChange,
 					}}
 				/>
 
@@ -426,6 +449,21 @@ const Apk = () => {
 				/>
 
 				<Radio name="must" label="是否必经" valueEnum={convertValueEnum(mustEnum)} required />
+
+				<ProFormDependency name={["apkType"]}>
+					{({ apkType }) => {
+						const dis = Array.isArray(apkType) && apkType.length >= 2 && apkType[1] === 1;
+						return (
+							<Radio
+								name="flags"
+								disabled={!dis}
+								label="是否强制更新"
+								valueEnum={convertValueEnum(flagsEnum)}
+								required={dis}
+							/>
+						);
+					}}
+				</ProFormDependency>
 
 				{showUpload ? (
 					<ProUpload

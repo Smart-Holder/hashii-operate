@@ -27,6 +27,7 @@ export interface IApkAddProps {
 	description?: string;
 	id?: number;
 	servMd5?: string;
+	flags?: number;
 }
 
 interface IApkForbiddenProps {
