@@ -51,6 +51,7 @@ export const deviceStatusEnum = {
 };
 
 export enum DeviceSizeEnum {
+	"21寸" = 2,
 	"32寸" = 0,
 	"43寸" = 1,
 }
