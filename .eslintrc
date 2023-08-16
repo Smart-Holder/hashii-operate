@@ -1,11 +1,9 @@
 {
 	"extends": ["react-app", "react-app/jest", "plugin:@typescript-eslint/recommended-requiring-type-checking"],
-	// "parserOptions": {
-	// 	"project": [
-	// 		"./tsconfig.json"
-	// 	],
-	// 	"tsconfigRootDir": "."
-	// },
+	"parserOptions": {
+		"project": ["./tsconfig.json"],
+		"tsconfigRootDir": "."
+	},
 	"rules": {
 		"@typescript-eslint/no-unsafe-call": "off",
 		"@typescript-eslint/no-misused-promises": "off",
