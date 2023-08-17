@@ -1,8 +1,9 @@
 const webpack = require("webpack");
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const HappyPack = require("happypack");
-let happyThreadPool = HappyPack.ThreadPool({ size: 8 });
+// const HappyPack = require("happypack");
+// let happyThreadPool = HappyPack.ThreadPool({ size: 8 });
 module.exports = function override(config, env) {
+	config.devtool = false;
 	config.resolve.fallback = {
 		url: require.resolve("url"),
 		assert: require.resolve("assert"),
@@ -17,18 +18,18 @@ module.exports = function override(config, env) {
 		new webpack.ProvidePlugin({
 			process: "process/browser",
 			Buffer: ["buffer", "Buffer"],
-		}),
-		new HappyPack({
-			id: "js",
-			threadPool: happyThreadPool,
-			loaders: ["babel-loader"],
-		}),
-
-		new HappyPack({
-			id: "styles",
-			threadPool: happyThreadPool,
-			loaders: ["style-loader", "css-loader", "sass-loader"],
 		})
+		// new HappyPack({
+		// 	id: "js",
+		// 	threadPool: happyThreadPool,
+		// 	loaders: ["babel-loader"],
+		// }),
+
+		// new HappyPack({
+		// 	id: "styles",
+		// 	threadPool: happyThreadPool,
+		// 	loaders: ["style-loader", "css-loader", "sass-loader"],
+		// })
 		// new BundleAnalyzerPlugin()
 	);
 	config.ignoreWarnings = [/Failed to parse source map/];
