@@ -5,7 +5,7 @@
 		"tsconfigRootDir": "."
 	},
 	// "ignorePatterns": ["**/*.js"],
-	"include": ["./commitlint.config.js"],
+	// "include": ["./commitlint.config.js"],
 	"rules": {
 		"@typescript-eslint/no-unsafe-call": "off",
 		"@typescript-eslint/no-misused-promises": "off",
