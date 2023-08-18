@@ -105,6 +105,7 @@
 		"braft-editor": "^2.3.9",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.33.0",
+		"happypack": "^5.0.1",
 		"husky": "^8.0.0",
 		"lint-staged": "^13.1.1",
 		"prettier": "2.8.4"
