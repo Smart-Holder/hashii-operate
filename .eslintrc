@@ -9,7 +9,7 @@
 		"project": ["./tsconfig.json"],
 		"tsconfigRootDir": "."
 	},
-	// "ignorePatterns": ["**/*.js"],
+	"ignorePatterns": ["config-overrides.js", "commitlint.config.js"],
 	// "include": ["./commitlint.config.js"],
 	"rules": {
 		"@typescript-eslint/no-unsafe-call": "off",

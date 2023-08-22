@@ -27,11 +27,10 @@ module.exports = function override(config, env) {
 			threadPool: happyThreadPool,
 			loaders: ["babel-loader"],
 		}),
-
 		new HappyPack({
 			id: "styles",
 			threadPool: happyThreadPool,
-			loaders: ["style-loader", "css-loader", "sass-loader"],
+			loaders: ["style-loader", "sass-loader"],
 		})
 		// new BundleAnalyzerPlugin()
 	);

@@ -5,11 +5,11 @@ import { t } from "i18next";
 import Qs from "qs";
 import ErrorCode from "./errorCode";
 import { getUserInfo, logout } from "./tools";
-import { Body } from "aws-sdk/clients/s3"
+import { Body } from "aws-sdk/clients/s3";
 // import { getUserInfo } from "./utils";
 AWS.config.update({
-	accessKeyId: 'AKIARTU4UXGJFLBJ4RFC',
-	secretAccessKey: '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'
+	accessKeyId: "AKIARTU4UXGJFLBJ4RFC",
+	secretAccessKey: "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",
 });
 const S3 = new AWS.S3();
 const BucketName = "hashii-img/img";
@@ -202,20 +202,24 @@ export const AwsUpload = ({
 	Key,
 	Body,
 	ContentType,
-	ContentDisposition = 'inline'
-}:{
-	Bucket:string,
-	Key:string,
-	Body:Body,
-	ContentType?:string,
-	ContentDisposition?:'inline' | 'attachment'
-}) =>  S3.upload({
-	Bucket,
-	Key,
-	Body,
-	ACL: 'public-read',
-	ContentType,
-	ContentDisposition,
-},{
-	partSize:10 * 1024 * 1024
-}).promise();
+	ContentDisposition = "inline",
+}: {
+	Bucket: string;
+	Key: string;
+	Body: Body;
+	ContentType?: string;
+	ContentDisposition?: "inline" | "attachment";
+}) =>
+	S3.upload(
+		{
+			Bucket,
+			Key,
+			Body,
+			ACL: "public-read",
+			ContentType,
+			ContentDisposition,
+		},
+		{
+			partSize: 10 * 1024 * 1024,
+		}
+	).promise();

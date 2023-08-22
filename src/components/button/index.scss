@@ -2,21 +2,23 @@ $edit: #00c873;
 $delete: #ff4c54;
 $info: #1890ff;
 
-.edit.ant-btn-primary{
-	background-color: $edit ;
-	border-color: $edit ;
-	&.ant-btn-primary:hover,.ant-btn-primary:focus {
-		background-color: rgba($edit,0.7);
-		border-color: rgba($edit,0.7);
+.edit.ant-btn-primary {
+	background-color: $edit;
+	border-color: $edit;
+	&.ant-btn-primary:hover,
+	.ant-btn-primary:focus {
+		background-color: rgba($edit, 0.7);
+		border-color: rgba($edit, 0.7);
 	}
 }
 
-.delete.ant-btn-primary{
-	background-color: $delete ;
-	border-color: $delete ;
-	&.ant-btn-primary:hover,.ant-btn-primary:focus {
-		background-color: rgba($delete,0.7);
-		border-color: rgba($delete,0.7);
+.delete.ant-btn-primary {
+	background-color: $delete;
+	border-color: $delete;
+	&.ant-btn-primary:hover,
+	.ant-btn-primary:focus {
+		background-color: rgba($delete, 0.7);
+		border-color: rgba($delete, 0.7);
 	}
 }
 
@@ -30,11 +32,12 @@ $info: #1890ff;
 // 	border-color: #1890ff !important;
 // }
 
-.info.ant-btn-primary{
-	background-color: $info ;
-	border-color: $info ;
-	&.ant-btn-primary:hover,.ant-btn-primary:focus {
-		background-color: rgba($info,0.7);
-		border-color: rgba($info,0.7);
+.info.ant-btn-primary {
+	background-color: $info;
+	border-color: $info;
+	&.ant-btn-primary:hover,
+	.ant-btn-primary:focus {
+		background-color: rgba($info, 0.7);
+		border-color: rgba($info, 0.7);
 	}
 }

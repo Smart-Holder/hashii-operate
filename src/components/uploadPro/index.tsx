@@ -66,38 +66,41 @@ const ProUpload = (props: IUploadQiniuProps) => {
 		const { showUploadList = true } = fieldProps;
 		const file = e.file as RcFile;
 		const uploadList = [...fileList];
-		console.log(file.type.split("/")[1], banSuffix, "file.type.split('/')[1]",e);
+		console.log(file.type.split("/")[1], banSuffix, "file.type.split('/')[1]", e);
 
 		try {
 			if (banSuffix.includes(file.type.split("/")[1])) throw new Error("不支持的图片类型");
-			if(!file)  throw new Error("请选择上传的素材！");
+			if (!file) throw new Error("请选择上传的素材！");
 			// uploadEventChange && uploadEventChange("start");
 			setloading(true);
 			// const { data: path } = await upload(file);
 			const envType = process.env.REACT_APP_NODE_ENV;
-			let KeyName = 'images';
+			let KeyName = "images";
 			const year = moment().year();
-			const month = moment().format('MM');
+			const month = moment().format("MM");
 			const folder = `${year}-${month}`;
-			if(envType === "dev" || envType === "development"){
-				KeyName = "dev-"+folder;
-			}else if(envType === "test"){
-				KeyName = "test-"+folder;
-			}else if(envType === "production"||envType === "prod"){
-				KeyName = "prod-"+folder;
+			if (envType === "dev" || envType === "development") {
+				KeyName = "dev-" + folder;
+			} else if (envType === "test") {
+				KeyName = "test-" + folder;
+			} else if (envType === "production" || envType === "prod") {
+				KeyName = "prod-" + folder;
 			}
 
 			const time = new Date().getTime();
 			const fileName = file.name;
-			const filename = fileName.substring(0, fileName.lastIndexOf("."))
-			const filename_suffix = '.'+fileName.split('.').pop();
+			const filename = fileName.substring(0, fileName.lastIndexOf("."));
+			const filename_suffix = "." + fileName.split(".").pop();
 
-
-			
-			const data = await AwsUpload({ Bucket:'hashii-img/img', Key:`${KeyName}/${filename}_${time}${filename_suffix}`, Body:file, ContentType:file.type });
+			const data = await AwsUpload({
+				Bucket: "hashii-img/img",
+				Key: `${KeyName}/${filename}_${time}${filename_suffix}`,
+				Body: file,
+				ContentType: file.type,
+			});
 			// const image = path.endsWith(".mp4") ? path + "?vframe/jpg/offset/1" : path;
 			// console.log(data,'data')
-			const path = `https://files.smartholder.jp/${data.Key}`
+			const path = `https://files.smartholder.jp/${data.Key}`;
 			const image = path;
 			e.data.image = image;
 

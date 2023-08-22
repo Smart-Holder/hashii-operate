@@ -103,6 +103,7 @@
 		"@types/node": "^20.4.2",
 		"babel-plugin-import": "^1.13.8",
 		"braft-editor": "^2.3.9",
+		"commitlint": "^17.7.1",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.33.0",
 		"happypack": "^5.0.1",
