@@ -1,29 +1,26 @@
 import React from "react";
 import { useRoutes, NonIndexRouteObject } from "react-router-dom";
-// import Main from "./pages/main";
-// import Login from "./pages/login";
+import Main from "./pages/main";
+import Login from "./pages/login";
 import { RouterConfig } from "./interface";
+
+import Page1 from "./pages/page1";
+import Device from "./pages/device";
+import TotalDeviceData from "./pages/totalDeviceData";
+import Merchant from "./pages/merchant";
+import Works from "./pages/works";
+import WorksDetail from "./pages/worksDetail";
+import WorksIssue from "./pages/worksIssue";
+import Nft from "./pages/nft";
+import Series from "./pages/series";
+import Apk from "./pages/apk";
+import Mobile from "./pages/mobile";
+import MerchantDetail from "./pages/merchantDetail";
 
 interface IRouteProps extends NonIndexRouteObject {
 	title?: string;
 	subTitle?: string;
 }
-
-const Main = React.lazy(() => import("./pages/main"));
-const Login = React.lazy(() => import("./pages/login"));
-
-const Page1 = React.lazy(() => import("./pages/page1"));
-const Device = React.lazy(() => import("./pages/device"));
-const TotalDeviceData = React.lazy(() => import("./pages/totalDeviceData"));
-const Merchant = React.lazy(() => import("./pages/merchant"));
-const Works = React.lazy(() => import("./pages/works"));
-const WorksDetail = React.lazy(() => import("./pages/worksDetail"));
-const WorksIssue = React.lazy(() => import("./pages/worksIssue"));
-const Nft = React.lazy(() => import("./pages/nft"));
-const Series = React.lazy(() => import("./pages/series"));
-const Apk = React.lazy(() => import("./pages/apk"));
-const Mobile = React.lazy(() => import("./pages/mobile"));
-const MerchantDetail = React.lazy(() => import("./pages/merchantDetail"));
 
 export const mainRoutes: IRouteProps[] = [
 	{ path: RouterConfig.Path.page1, element: <Page1 />, title: "page1", subTitle: "page1" },
