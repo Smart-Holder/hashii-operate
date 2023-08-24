@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Router from "./router";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Spin } from "antd";
 import ZH from "antd/es/locale/zh_CN";
 import EN from "antd/es/locale/en_US";
 import JA from "antd/es/locale/ja_JP";
@@ -26,11 +26,31 @@ function App() {
 
 	return (
 		<div className="App">
-			<ConfigProvider locale={localeConfig[locale]}>
-				<BrowserRouter>
-					<Router />
-				</BrowserRouter>
-			</ConfigProvider>
+			<Suspense
+				fallback={
+					<div
+						style={{
+							width: "100vw",
+							height: "100vh",
+							textAlign: "center",
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<div>
+							<Spin />
+							<div style={{ marginTop: "10px" }}>Loading...</div>
+						</div>
+					</div>
+				}
+			>
+				<ConfigProvider locale={localeConfig[locale]}>
+					<BrowserRouter>
+						<Router />
+					</BrowserRouter>
+				</ConfigProvider>
+			</Suspense>
 		</div>
 	);
 }

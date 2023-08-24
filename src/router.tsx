@@ -1,13 +1,16 @@
 import React from "react";
 import { useRoutes, NonIndexRouteObject } from "react-router-dom";
-import Main from "./pages/main";
-import Login from "./pages/login";
+// import Main from "./pages/main";
+// import Login from "./pages/login";
 import { RouterConfig } from "./interface";
 
 interface IRouteProps extends NonIndexRouteObject {
 	title?: string;
 	subTitle?: string;
 }
+
+const Main = React.lazy(() => import("./pages/main"));
+const Login = React.lazy(() => import("./pages/login"));
 
 const Page1 = React.lazy(() => import("./pages/page1"));
 const Device = React.lazy(() => import("./pages/device"));
