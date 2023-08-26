@@ -32,6 +32,8 @@ export interface IWorksAddProps {
 	workPictureUrl: string;
 	workDesc: string;
 	workID?: string | number;
+	is_transfer: string;
+	issueExtension: string;
 }
 
 export interface IWorkIssueProps {
