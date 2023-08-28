@@ -137,7 +137,7 @@ const WorksDetail = () => {
 						colon={false}
 						label="是否允许转出NFT"
 					>
-						<Select placeholder="请选择是否允许转出NFT">
+						<Select placeholder="请选择是否允许转出NFT" disabled={readonly}>
 							<Option value="0">不允许</Option>
 							<Option value="1">允许</Option>
 						</Select>
