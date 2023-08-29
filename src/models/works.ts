@@ -33,7 +33,7 @@ export interface IWorksAddProps {
 	workDesc: string;
 	workID?: string | number;
 	is_transfer: string;
-	issueExtension: string;
+	properties: string;
 }
 
 export interface IWorkIssueProps {

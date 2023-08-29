@@ -46,11 +46,6 @@ const WorksDetail = () => {
 				}}
 				onFinish={async (values: IWorksAddProps) => {
 					if (!values.workPictureUrl) return false;
-					const issueExtensionObj = {
-						properties: [],
-						type: 0,
-						timerNFTs: [],
-					};
 					const properties: {
 						trait_type: string;
 						value: string;
@@ -60,10 +55,9 @@ const WorksDetail = () => {
 						trait_type: "is_transfer",
 						value: values.is_transfer,
 					});
-					issueExtensionObj.properties = properties;
 					isEdit
-						? await workEdit({ ...values, workID, issueExtension: JSON.stringify(issueExtensionObj) })
-						: await workAdd({ ...values, issueExtension: JSON.stringify(issueExtensionObj) });
+						? await workEdit({ ...values, workID, properties: JSON.stringify(properties) })
+						: await workAdd({ ...values, properties: JSON.stringify(properties) });
 					navigate(-1);
 					message.success(t("提交成功"));
 				}}
@@ -72,10 +66,11 @@ const WorksDetail = () => {
 					const { data } = await getWorkDetail(workID);
 					data.workPictureUrl && setdefaultFileList([{ url: data.workPictureUrl }]);
 					// properties
-					const issueExtensionJson = JSON.parse(data.issueExtension) as {
-						properties: { trait_type: string; value: string }[];
-					};
-					issueExtensionJson.properties.forEach((item) => {
+					const propertiesJson = JSON.parse(data.properties) as {
+						trait_type: string;
+						value: string;
+					}[];
+					propertiesJson.forEach((item) => {
 						if (item.trait_type === "is_transfer") {
 							data.is_transfer = item.value;
 						}

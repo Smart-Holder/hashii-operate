@@ -129,6 +129,8 @@ export default () => {
 
 	const [pathname, setPathname] = useState<string>(window.location.pathname);
 
+	const [searchValue, setSearchValue] = useState<string>(window.location.search);
+
 	const userinfo = getUserInfo();
 
 	useEffect(() => {
@@ -146,6 +148,10 @@ export default () => {
 		// eslint-disable-next-line
 	}, []); // eslint-disable-next-line
 
+	useEffect(() => {
+		setSearchValue(window.location.search);
+	}, []);
+
 	const navigate = useNavigate();
 	return (
 		<div
@@ -157,8 +163,10 @@ export default () => {
 			<ProLayout
 				siderWidth={216}
 				onPageChange={(e) => {
-					console.log(e.pathname, "key");
-					e && navigate(e.pathname);
+					console.log(e.pathname, "key111", searchValue);
+					const searchStr = window.location.pathname.split("/").length >= 4 ? searchValue : "";
+
+					e && navigate(e.pathname + searchStr);
 				}}
 				collapsed={collapsed}
 				collapsedButtonRender={false}
@@ -209,7 +217,7 @@ export default () => {
 					onBack={
 						window.location.pathname.split("/").length >= 4
 							? () => {
-									navigate(-1);
+									navigate(-2);
 									setTimeout(() => {
 										setPathname(window.location.pathname);
 									}, 10);
