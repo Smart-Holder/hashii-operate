@@ -1,21 +1,74 @@
 import React from "react";
 import { useRoutes, NonIndexRouteObject } from "react-router-dom";
-import Main from "./pages/main";
-import Login from "./pages/login";
 import { RouterConfig } from "./interface";
 
-import Page1 from "./pages/page1";
-import Device from "./pages/device";
-import TotalDeviceData from "./pages/totalDeviceData";
-import Merchant from "./pages/merchant";
-import Works from "./pages/works";
-import WorksDetail from "./pages/worksDetail";
-import WorksIssue from "./pages/worksIssue";
-import Nft from "./pages/nft";
-import Series from "./pages/series";
-import Apk from "./pages/apk";
-import Mobile from "./pages/mobile";
-import MerchantDetail from "./pages/merchantDetail";
+// import Main from "./pages/main";
+// import Login from "./pages/login";
+
+// import Page1 from "./pages/page1";
+// import Device from "./pages/device";
+// import TotalDeviceData from "./pages/totalDeviceData";
+// import Merchant from "./pages/merchant";
+// import Works from "./pages/works";
+// import WorksDetail from "./pages/worksDetail";
+// import WorksIssue from "./pages/worksIssue";
+// import Nft from "./pages/nft";
+// import Series from "./pages/series";
+// import Apk from "./pages/apk";
+// import Mobile from "./pages/mobile";
+// import MerchantDetail from "./pages/merchantDetail";
+
+const lazyReactNaiveRetry: typeof React.lazy = (importer) => {
+	const retryImport = async () => {
+		try {
+			return await importer();
+		} catch (error) {
+			// retry 10 times with 1 second delay
+			for (let i = 0; i < 10; i++) {
+				await new Promise((resolve) => setTimeout(resolve, 1000));
+				try {
+					return await importer();
+				} catch (e) {
+					console.log("retrying import");
+				}
+			}
+			throw error;
+		}
+	};
+	return React.lazy(retryImport);
+};
+
+const Main = lazyReactNaiveRetry(() => import("./pages/main"));
+const Login = lazyReactNaiveRetry(() => import("./pages/login"));
+
+const Page1 = lazyReactNaiveRetry(() => import("./pages/page1"));
+const Device = lazyReactNaiveRetry(() => import("./pages/device"));
+const TotalDeviceData = lazyReactNaiveRetry(() => import("./pages/totalDeviceData"));
+const Merchant = lazyReactNaiveRetry(() => import("./pages/merchant"));
+const Works = lazyReactNaiveRetry(() => import("./pages/works"));
+const WorksDetail = lazyReactNaiveRetry(() => import("./pages/worksDetail"));
+const WorksIssue = lazyReactNaiveRetry(() => import("./pages/worksIssue"));
+const Nft = lazyReactNaiveRetry(() => import("./pages/nft"));
+const Series = lazyReactNaiveRetry(() => import("./pages/series"));
+const Apk = lazyReactNaiveRetry(() => import("./pages/apk"));
+const Mobile = lazyReactNaiveRetry(() => import("./pages/mobile"));
+const MerchantDetail = lazyReactNaiveRetry(() => import("./pages/merchantDetail"));
+
+// const Main = React.lazy(() => import("./pages/main"));
+// const Login = React.lazy(() => import("./pages/login"));
+
+// const Page1 = React.lazy(() => import("./pages/page1"));
+// const Device = React.lazy(() => import("./pages/device"));
+// const TotalDeviceData = React.lazy(() => import("./pages/totalDeviceData"));
+// const Merchant = React.lazy(() => import("./pages/merchant"));
+// const Works = React.lazy(() => import("./pages/works"));
+// const WorksDetail = React.lazy(() => import("./pages/worksDetail"));
+// const WorksIssue = React.lazy(() => import("./pages/worksIssue"));
+// const Nft = React.lazy(() => import("./pages/nft"));
+// const Series = React.lazy(() => import("./pages/series"));
+// const Apk = React.lazy(() => import("./pages/apk"));
+// const Mobile = React.lazy(() => import("./pages/mobile"));
+// const MerchantDetail = React.lazy(() => import("./pages/merchantDetail"));
 
 interface IRouteProps extends NonIndexRouteObject {
 	title?: string;

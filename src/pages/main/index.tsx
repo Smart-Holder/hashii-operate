@@ -1,5 +1,4 @@
 import { MenuUnfoldOutlined, MenuFoldOutlined, MailTwoTone, UserOutlined } from "@ant-design/icons";
-import type { ProSettings } from "@ant-design/pro-components";
 import {
 	PageContainer,
 	ProLayout,
@@ -10,12 +9,14 @@ import {
 	ProFormDependency,
 	ProFormText,
 } from "@ant-design/pro-components";
-import { useEffect, useState } from "react";
+import type { ProSettings } from "@ant-design/pro-components";
+
+import { Suspense, useEffect, useState } from "react";
 import defaultProps from "./_defaultProps";
 import React from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import LanguageSelect from "../../components/languageSelect";
-import { Dropdown, MenuProps, Modal, message } from "antd";
+import { Dropdown, MenuProps, Modal, message, Spin } from "antd";
 import Button from "../../components/button";
 import { getUserInfo, logout, t } from "../../utils/tools";
 import { IUserSetpasswordProps, userSetpassword, userVerificationCode } from "../../models/user";
@@ -121,7 +122,7 @@ const items: MenuProps["items"] = [
 ];
 
 export default () => {
-	const [settings] = useState<Partial<ProSettings> | undefined>({
+	const [settings] = useState<Partial<ProSettings>>({
 		layout: "mix",
 	});
 
@@ -163,10 +164,13 @@ export default () => {
 			<ProLayout
 				siderWidth={216}
 				onPageChange={(e) => {
-					console.log(e.pathname, "key111", searchValue);
-					const searchStr = window.location.pathname.split("/").length >= 4 ? searchValue : "";
-
-					e && navigate(e.pathname + searchStr);
+					// console.log(e.pathname, "key111", searchValue);
+					try {
+						const searchStr = window.location.pathname.split("/").length >= 4 ? searchValue : "";
+						e && navigate(e.pathname + searchStr);
+					} catch (error) {
+						console.log(error, "error");
+					}
 				}}
 				collapsed={collapsed}
 				collapsedButtonRender={false}
@@ -231,7 +235,27 @@ export default () => {
 							minHeight: 800,
 						}}
 					>
-						<Outlet />
+						<Suspense
+							fallback={
+								<div
+									style={{
+										width: "100%",
+										height: "100vh",
+										textAlign: "center",
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+									}}
+								>
+									<div>
+										<Spin />
+										<div style={{ marginTop: "10px" }}>Loading...</div>
+									</div>
+								</div>
+							}
+						>
+							<Outlet />
+						</Suspense>
 						<div />
 					</ProCard>
 				</PageContainer>
