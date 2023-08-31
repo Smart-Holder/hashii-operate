@@ -1,8 +1,10 @@
 const webpack = require("webpack");
+// let os = require('os')
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const HappyPack = require("happypack");
 let happyThreadPool = HappyPack.ThreadPool({
-	size: 4,
+	/* size: os.cpus().length -1, */
+	size:4,
 	maxQueueSize: 10,
 });
 module.exports = function override(config, env) {
