@@ -11,7 +11,8 @@ import { ProFormUploadButton, ProFormUploadButtonProps } from "@ant-design/pro-c
 import { t } from "../../utils/tools";
 import { RuleObject } from "antd/es/form";
 import { AwsUpload } from "../../utils/axios";
-import moment from "moment";
+// import moment from "moment";
+import dayjs from "dayjs";
 
 export interface IFileListItemProps extends UploadFile {
 	uid: string;
@@ -76,8 +77,10 @@ const ProUpload = (props: IUploadQiniuProps) => {
 			// const { data: path } = await upload(file);
 			const envType = process.env.REACT_APP_NODE_ENV;
 			let KeyName = "images";
-			const year = moment().year();
-			const month = moment().format("MM");
+			// const year = moment().year();
+			// const month = moment().format("MM");
+			const year = dayjs().year();
+			const month = dayjs().format("MM");
 			const folder = `${year}-${month}`;
 			if (envType === "dev" || envType === "development") {
 				KeyName = "dev-" + folder;

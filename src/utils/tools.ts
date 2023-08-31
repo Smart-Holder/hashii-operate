@@ -1,6 +1,12 @@
-import moment from "moment-timezone";
+// import moment from "moment-timezone";
 import crypto from "./crypto";
 import { t as textTranslation } from "i18next";
+import dayjs from "dayjs";
+
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone"; // dependent on utc plugin
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export interface IUserInfoProps {
 	email: string;
@@ -39,6 +45,7 @@ export const t = (text: string | number) => {
 const timeZoneTime = Intl.DateTimeFormat().resolvedOptions().timeZone;
 export const formatTimeZoneTime = (timeString?: string | number): string => {
 	if (!timeString) return "";
-	const time = moment.tz(timeString, "Asia/Shanghai").clone().tz(timeZoneTime).format("YYYY-MM-DD HH:mm:ss");
+	// const time = moment.tz(timeString, "Asia/Shanghai").clone().tz(timeZoneTime).format("YYYY-MM-DD HH:mm:ss");
+	const time = dayjs.tz(timeString, "Asia/Shanghai").clone().tz(timeZoneTime).format("YYYY-MM-DD HH:mm:ss");
 	return time;
 };
