@@ -1,17 +1,22 @@
 import { message } from "antd";
-import AWS from "aws-sdk";
+// import AWS from "aws-sdk";
 import axios, { AxiosError, AxiosRequestConfig, Canceler } from "axios";
 import { t } from "i18next";
 import Qs from "qs";
 import ErrorCode from "./errorCode";
 import { getUserInfo, logout } from "./tools";
-import { Body } from "aws-sdk/clients/s3";
+import s3, { Body } from "aws-sdk/clients/s3";
 // import { getUserInfo } from "./utils";
-AWS.config.update({
+// AWS.config.update({
+// 	accessKeyId: "AKIARTU4UXGJFLBJ4RFC",
+// 	secretAccessKey: "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",
+// });
+// const S3 = new AWS.S3();
+
+const S3 = new s3({
 	accessKeyId: "AKIARTU4UXGJFLBJ4RFC",
 	secretAccessKey: "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",
 });
-const S3 = new AWS.S3();
 const BucketName = "hashii-img/img";
 const apiUrl: { [key: string]: string } = {
 	// 'dev': "https://manager-dev.stars-mine.com/api/v1/backend",
