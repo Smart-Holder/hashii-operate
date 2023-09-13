@@ -92,12 +92,13 @@ const ProUpload = (props: IUploadQiniuProps) => {
 
 			const time = new Date().getTime();
 			const fileName = file.name;
-			const filename = fileName.substring(0, fileName.lastIndexOf("."));
+			// const filename = fileName.substring(0, fileName.lastIndexOf("."));
 			const filename_suffix = "." + fileName.split(".").pop();
 
 			const data = await AwsUpload({
 				Bucket: "hashii-img/img",
-				Key: `${KeyName}/${filename}_${time}${filename_suffix}`,
+				// Key: `${KeyName}/${filename}_${time}${filename_suffix}`,
+				Key: `${KeyName}/${time}_${Math.random()}${filename_suffix}`,
 				Body: file,
 				ContentType: file.type,
 			});
