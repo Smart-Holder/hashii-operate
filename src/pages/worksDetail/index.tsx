@@ -51,14 +51,34 @@ const WorksDetail = () => {
 						value: string;
 					}[] = [];
 					// issueExtension: [{"trait_type": "AAAA", "value": "AAAA"}]
-					properties.push({
-						trait_type: "is_transfer",
-						value: values.is_transfer,
-					});
+					properties.push(
+						{
+							trait_type: "is_transfer",
+							value: values.is_transfer,
+						},
+						{
+							trait_type: "creatorName",
+							value: String(values.creatorName),
+						},
+						{
+							trait_type: "creatorTime",
+							value: String(values.creatorTime || Date.now()),
+						},
+						{
+							trait_type: "owner",
+							value: String(values.owner || ""),
+						},
+						{
+							trait_type: "size",
+							value: String(values.size || ""),
+						}
+					);
+
 					isEdit
 						? await workEdit({ ...values, workID, properties: JSON.stringify(properties) })
 						: await workAdd({ ...values, properties: JSON.stringify(properties) });
 					navigate(-1);
+
 					message.success(t("提交成功"));
 				}}
 				request={async () => {
