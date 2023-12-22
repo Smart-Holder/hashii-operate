@@ -202,7 +202,34 @@ export { axiosGet, axiosPost };
 //     }
 //   }).promise();
 
-export const AwsUpload = ({
+// export const AwsUpload = ({
+// 	Bucket = BucketName,
+// 	Key,
+// 	Body,
+// 	ContentType,
+// 	ContentDisposition = "inline",
+// }: {
+// 	Bucket: string;
+// 	Key: string;
+// 	Body: Body;
+// 	ContentType?: string;
+// 	ContentDisposition?: "inline" | "attachment";
+// }) =>
+// 	S3.upload(
+// 		{
+// 			Bucket,
+// 			Key,
+// 			Body,
+// 			ACL: "public-read",
+// 			ContentType,
+// 			ContentDisposition,
+// 		},
+// 		{
+// 			partSize: 10 * 1024 * 1024,
+// 		}
+// 	).promise();
+
+export const AwsUpload = async ({
 	Bucket = BucketName,
 	Key,
 	Body,
@@ -214,8 +241,8 @@ export const AwsUpload = ({
 	Body: Body;
 	ContentType?: string;
 	ContentDisposition?: "inline" | "attachment";
-}) =>
-	S3.upload(
+}) => {
+	return S3.upload(
 		{
 			Bucket,
 			Key,
@@ -227,4 +254,5 @@ export const AwsUpload = ({
 		{
 			partSize: 10 * 1024 * 1024,
 		}
-	).promise();
+	);
+};

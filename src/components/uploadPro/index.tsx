@@ -37,6 +37,7 @@ export type IUploadEventChangeProps = (event: IUploadEventProps) => void;
 
 const ProUpload = (props: IUploadQiniuProps) => {
 	const [loading, setloading] = useState<boolean>(false);
+	const [title, setTitle] = useState<string>("Upload");
 
 	const [fileList, setfileList] = useState<IFileListItemProps[]>([]);
 
@@ -95,31 +96,50 @@ const ProUpload = (props: IUploadQiniuProps) => {
 			// const filename = fileName.substring(0, fileName.lastIndexOf("."));
 			const filename_suffix = "." + fileName.split(".").pop();
 
-			const data = await AwsUpload({
+			const managedUpload = await AwsUpload({
 				Bucket: "hashii-img/img",
 				// Key: `${KeyName}/${filename}_${time}${filename_suffix}`,
 				Key: `${KeyName}/${time}_${Math.random()}${filename_suffix}`,
 				Body: file,
 				ContentType: file.type,
 			});
-			// const image = path.endsWith(".mp4") ? path + "?vframe/jpg/offset/1" : path;
-			// console.log(data,'data')
-			const path = `https://files.smartholder.jp/${data.Key}`;
-			const image = path;
-			e.data.image = image;
 
-			if (showUploadList) {
-				const { uid, name } = file;
-				const newItem: IFileListItemProps = { uid, name, status: "done", url: path };
-				uploadList.push(newItem);
-				setfileList(uploadList);
-				Boolean(props.name) && form?.setFieldsValue({ [String(props.name)]: uploadList });
-			} else {
-				Boolean(props.name) && form?.setFieldsValue({ [String(props.name)]: path });
+			managedUpload.on("httpUploadProgress", (progress) => {
+				const percentUploaded = Math.round((progress.loaded / progress.total) * 100);
+				// console.info(`Progress: ${percentUploaded}%`);
+				setTitle(`${percentUploaded}%`);
+				// setUploadProgress(percentUploaded);
+			});
+
+			try {
+				const data = await managedUpload.promise();
+				// 文件上传完成后的逻辑处理
+				// const image = path.endsWith(".mp4") ? path + "?vframe/jpg/offset/1" : path;
+				// console.log(data,'data')
+				const path = `https://files.smartholder.jp/${data.Key}`;
+				const image = path;
+				e.data.image = image;
+
+				if (showUploadList) {
+					const { uid, name } = file;
+					const newItem: IFileListItemProps = { uid, name, status: "done", url: path };
+					uploadList.push(newItem);
+					setfileList(uploadList);
+					Boolean(props.name) && form?.setFieldsValue({ [String(props.name)]: uploadList });
+				} else {
+					Boolean(props.name) && form?.setFieldsValue({ [String(props.name)]: path });
+				}
+				uploadEventChange && uploadEventChange(image);
+			} catch (error) {
+				managedUpload.abort();
+				console.error("文件上传错误:", error);
+				message.error("文件上传错误,请重新上传！");
+				setloading(false);
+				setTitle("Upload");
 			}
-			uploadEventChange && uploadEventChange(image);
 		} catch (error) {
 			setloading(false);
+			setTitle("Upload");
 			uploadEventChange && uploadEventChange("");
 			setfileList(uploadList);
 			if (error instanceof Error) {
@@ -130,13 +150,14 @@ const ProUpload = (props: IUploadQiniuProps) => {
 			// message.warning(error?.msg || "上传失败!");
 		}
 		setloading(false);
+		setTitle("Upload");
 	};
 	// rules.map(item => {
 	// 	item.
 	// })
 	const UploadBox = (
 		<ProFormUploadButton
-			title={"Upload"}
+			title={title}
 			{...rest}
 			label={typeof label === "string" ? t(label) : label}
 			disabled={loading || disabled}
